@@ -1,19 +1,15 @@
-from agent.tools import search_web, scrape_reddit
+from agent.tools import scrape_discussions
 from agent.analyzer import analyze_content
 
 def run_agent_loop():
-    print("[*] Planning task...")
+    print("🔍 AI Strategy Analyst is ready.")
+    query = input("Enter an industry, market, or product to analyze: ")
 
-    query = input("Enter market or product area: ")
-    print(f"[*] Searching web for '{query}'")
+    print(f"[*] Scraping content related to '{query}'...")
+    text_chunks = scrape_discussions(query)
 
-    web_data = search_web(query)
-    reddit_data = scrape_reddit(query)
+    print(f"[*] Analyzing content with GPT4All...")
+    report = analyze_content(text_chunks)
 
-    combined = web_data + reddit_data
-
-    print("[*] Analyzing data for market gaps...")
-    report = analyze_content(combined)
-
-    print("\n=== Market Gap Report ===\n")
+    print("\n📊 Market Gap Report:\n")
     print(report)
