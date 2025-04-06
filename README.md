@@ -10,6 +10,6 @@ An autonomous AI agent that scans industries, identifies trends, uncovers market
 ## Run Locally
 
 ```bash
-git clone https://github.com/your-username/ai-strategy-agent.git
+git clone https://github.com/1ndrayu/ai-strategy-agent.git
 cd ai-strategy-agent
 pip install -r requirements.txt
