@@ -1,31 +1,27 @@
 from gpt4all import GPT4All
-import os
 
-# Path to your local GPT4All model
-MODEL_NAME = "ggml-model-gpt4all-falcon-q4_0.bin"
+MODEL_PATH = "./models/ggml-model-gpt4all-falcon-q4_0.bin"
 
 def load_model():
-    return GPT4All(model_name=MODEL_NAME, model_path="./", allow_download=False)
+    return GPT4All(model_name=MODEL_PATH, allow_download=False)
 
-def format_prompt(text_chunks):
-    joined_text = "\n".join(text_chunks)
+def format_prompt(posts):
+    body = "\n".join(f"- {p}" for p in posts)
     return f"""
-You are a business strategist AI. Analyze the following user discussions, search snippets, and forum posts to identify:
-1. Complaints or frustrations
-2. Unmet needs or gaps in the market
-3. Opportunities for innovation
+You are a market research strategist.
 
-Text data:
-{joined_text}
+Analyze the following user discussions and detect:
+1. Recurring problems or complaints
+2. Unmet needs or frustrations
+3. New opportunities for product or service innovation
 
-Respond in bullet point format.
+Here is the input:
+{body}
+
+Output a bullet-point report.
 """
 
-def analyze_content(text_chunks):
+def analyze_content(posts):
     model = load_model()
-    prompt = format_prompt(text_chunks)
-
-    print("[*] Running local GPT4All model for market analysis...")
-    response = model.generate(prompt, max_tokens=500, temp=0.7)
-
-    return response.strip()
+    prompt = format_prompt(posts)
+    return model.generate(prompt, max_tokens=500, temp=0.7).strip()
