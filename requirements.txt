@@ -1,0 +1,19 @@
+
+---
+
+### 📄 `requirements.txt`
+
+```txt
+openai
+gpt4all
+langchain
+beautifulsoup4
+playwright
+pandas
+spacy
+scikit-learn
+nltk
+tiktoken
+streamlit
+python-dotenv
+plotly
